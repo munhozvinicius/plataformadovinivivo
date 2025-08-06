@@ -1,79 +1,67 @@
-let pagesConfig = [], homeConfig = {};
+const menu = document.getElementById('menu');
+const main = document.getElementById('main-content');
+let pages = [], homepage = {};
 
 async function loadConfigs() {
-  const [pRes, hRes] = await Promise.all([
-    fetch('data/pages.json'),
-    fetch('data/homepage.json')
-  ]);
-  pagesConfig = await pRes.json();
-  homeConfig = await hRes.json();
+  homepage = await (await fetch('data/homepage.json')).json();
+  pages = await (await fetch('data/pages.json')).json();
+  renderMenu();
+  handleRoute();
 }
 
-function renderSidebar() {
-  const sb = document.getElementById('sidebar');
-  sb.innerHTML = '<div class="logo">Plataforma do Vini</div>';
-  const makeBtn = (label, hash) => {
-    const a = document.createElement('a');
-    a.href = '#/'+hash;
-    a.className = 'menu-button';
-    a.textContent = label;
-    sb.appendChild(a);
-  };
-  makeBtn('🏠 Início','home');
-  pagesConfig.forEach(p => makeBtn(p.emoji+' '+p.label, 'product/'+p.id));
-  makeBtn('🛠️ Admin','admin');
+function renderMenu() {
+  menu.innerHTML = '';
+  const homeBtn = document.createElement('button');
+  homeBtn.textContent = '🏠 Início';
+  homeBtn.onclick = () => location.hash = '#home';
+  menu.appendChild(homeBtn);
+
+  pages.forEach(p => {
+    const btn = document.createElement('button');
+    btn.textContent = `${p.emoji} ${p.label}`;
+    btn.onclick = () => location.hash = `#product/${p.id}`;
+    menu.appendChild(btn);
+  });
+
+  const adminBtn = document.createElement('button');
+  adminBtn.textContent = '🔧 Admin';
+  adminBtn.onclick = () => location.href = 'admin.html';
+  menu.appendChild(adminBtn);
 }
 
-function clearContent() {
-  document.getElementById('content').innerHTML = '';
+window.addEventListener('hashchange', handleRoute);
+
+function handleRoute() {
+  const hash = location.hash.slice(1);
+  if (!hash || hash === 'home') renderHome();
+  else if (hash.startsWith('product/')) renderProduct(hash.split('/')[1]);
 }
 
 function renderHome() {
-  clearContent();
-  const c = document.getElementById('content');
-  const card = document.createElement('div'); card.className='card';
-  card.innerHTML = `<h1 class="title">${homeConfig.title}</h1><p>${homeConfig.description}</p>`;
-  c.appendChild(card);
-  const upd = document.createElement('div'); upd.className='card alert';
-  upd.innerHTML = '<h2>Atualizações</h2>' + (homeConfig.updates||[]).map(u=>`<p><strong>${u.date}</strong> - ${u.text}</p>`).join('');
-  c.appendChild(upd);
+  main.innerHTML = '';
+  const cards = [];
+
+  cards.push(\`<div class="card"><h1>\${homepage.title}</h1><p>\${homepage.subtitle}</p></div>\`);
+  cards.push(\`<div class="card updates"><h2>Atualizações</h2>\${homepage.updates.map(u => \`<p><strong>\${u.date}</strong>: \${u.text}</p>\`).join('')}</div>\`);
+
+  main.innerHTML = cards.join('');
 }
 
 function renderProduct(id) {
-  const p = pagesConfig.find(x=>x.id===id);
-  clearContent();
-  const c = document.getElementById('content');
-  if(!p) { c.innerHTML = '<h2>Página não encontrada</h2>'; return; }
-  c.innerHTML = `<h1 class="title">${p.emoji} ${p.label}</h1>
-    <p class="subtitle">${p.subtitle}</p>
-    <div class="tabs">${p.tabs.map((t,i)=>`<button class="tab${i===0?' active':''}" onclick="activateTab(${i})">${t.label}</button>`).join('')}</div>
-    ${p.tabs.map((t,i)=>`<div class="tab-content${i===0?' active':''}">${t.content}</div>`).join('')}`;
+  const p = pages.find(x => x.id === id);
+  if (!p) { main.innerHTML = '<p>Produto não encontrado</p>'; return; }
+  let html = \`<div class="card"><h1>\${p.emoji} \${p.label}</h1><p>\${p.subtitle}</p></div>\`;
+  html += \`<div class="tabs">\${p.tabs.map((t,i) => \`<button data-i="\${i}">\${t.label}</button>\`).join('')}</div>\`;
+  html += '<div id="tab-content"></div>';
+  main.innerHTML = html;
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-content').innerHTML = p.tabs[btn.dataset.i].content;
+    };
+  });
+  document.querySelector('.tabs button').click();
 }
 
-function activateTab(i) {
-  document.querySelectorAll('.tab').forEach((b,idx)=>b.classList.toggle('active', idx===i));
-  document.querySelectorAll('.tab-content').forEach((tc,idx)=>tc.classList.toggle('active', idx===i));
-}
-
-function renderAdmin() {
-  window.location = 'admin.html';
-}
-
-function router() {
-  const hash = location.hash.slice(2).split('/');
-  const [route, param] = hash;
-  document.querySelectorAll('.menu-button').forEach(b=>b.classList.remove('active'));
-  const sel = document.querySelector(`.menu-button[href="#/${route}${param?'/'+param:''}"]`);
-  if(sel) sel.classList.add('active');
-  if(route==='home'||!route) renderHome();
-  else if(route==='product') renderProduct(param);
-  else if(route==='admin') renderAdmin();
-  else clearContent();
-}
-
-window.addEventListener('load', async()=>{
-  await loadConfigs();
-  renderSidebar();
-  router();
-});
-window.addEventListener('hashchange', router);
+loadConfigs();

@@ -1,68 +1,71 @@
-const owner='munhozvinicius',repo='plataformadovinivivo';
-let token='', pagesConfig=[], homeConfig={}, shaP='', shaH='';
+const OWNER='munhozvinicius',REPO='plataformadovinivivo';
+let token='',pages=[],sha='';
 const statusEl=document.getElementById('status');
-const secs=document.querySelectorAll('.sec'), tabs=document.querySelectorAll('.tab');
-document.getElementById('btnLoad').onclick=async()=>{
-  token=prompt('GitHub Token:'); if(!token)return; statusEl.innerText='Carregando...';
-  let res=await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/data/pages.json`,{headers:{Authorization:'token '+token}});
-  let data=await res.json(); shaP=data.sha; pagesConfig=JSON.parse(atob(data.content));
-  res=await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/data/homepage.json`,{headers:{Authorization:'token '+token}});
-  data=await res.json(); shaH=data.sha; homeConfig=JSON.parse(atob(data.content));
-  statusEl.innerText='Configuração carregada.'; renderSection('updates');
-};
-tabs.forEach(t=>t.onclick=()=>{
-  tabs.forEach(x=>x.classList.remove('active'));
+const tabs=document.querySelectorAll('.admin-tabs .tab');
+const secs=document.querySelectorAll('.admin-section');
+tabs.forEach(tab=>tab.onclick=()=>{
+  tabs.forEach(t=>t.classList.remove('active'));
   secs.forEach(s=>s.classList.remove('active'));
-  t.classList.add('active');
-  document.getElementById(t.dataset.sec).classList.add('active');
-  renderSection(t.dataset.sec);
+  tab.classList.add('active');
+  document.getElementById(tab.dataset.section).classList.add('active');
 });
-document.getElementById('btnSave').onclick=async()=>{
-  if(!token){alert('Carregue configs');return;} statusEl.innerText='Salvando...';
-  let c=btoa(unescape(encodeURIComponent(JSON.stringify(pagesConfig,null,2))));
-  await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/data/pages.json`,{method:'PUT',headers:{Authorization:'token '+token},body:JSON.stringify({message:'Update pages',content:c,sha:shaP})}).then(r=>r.json()).then(j=>shaP=j.content.sha);
-  c=btoa(unescape(encodeURIComponent(JSON.stringify(homeConfig,null,2))));
-  await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/data/homepage.json`,{method:'PUT',headers:{Authorization:'token '+token},body:JSON.stringify({message:'Update home',content:c,sha:shaH})}).then(r=>r.json()).then(j=>shaH=j.content.sha);
-  statusEl.innerText='Salvo!';
+document.getElementById('btnLoad').onclick=async()=>{
+  token=prompt('Cole seu GitHub PAT (repo:contents)');if(!token)return;
+  statusEl.innerText='🔄 Carregando...';
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/data/pages.json`,{headers:{Authorization:'token '+token}});
+  const j=await r.json();
+  pages=JSON.parse(atob(j.content));sha=j.sha;
+  statusEl.innerText='✅ Configuração carregada!';
 };
-function renderSection(sec){
-  if(sec==='updates') renderUpdates();
-  else if(sec==='develop') renderDevelop();
-  else if(sec==='edit') renderEditProducts();
-  else if(sec==='order') renderOrder();
-  else if(sec==='homeedit') renderEditHome();
-}
-function renderUpdates(){
-  const el=document.getElementById('updates');
-  el.innerHTML='<h2>Atualizações</h2><button id="addU"class="btn">+ Atualização</button><div id="listU"></div>';
-  homeConfig.updates=homeConfig.updates||[];
-  const list=homeConfig.updates, cont=document.getElementById('listU');
-  cont.innerHTML='';
-  list.forEach((u,i)=>{
-    const d=document.createElement('div');
-    d.innerHTML=`<input data-i="${i}" value="${u.date}" placeholder="Data"/><input data-i="${i}" value="${u.text}" placeholder="Texto"/><button data-i="${i}" class="btn delU">X</button>`;
-    cont.appendChild(d);
+document.getElementById('btnSave').onclick=async()=>{
+  if(!token)return alert('Carregue config antes');
+  statusEl.innerText='💾 Publicando...';
+  let content=btoa(unescape(encodeURIComponent(JSON.stringify(pages,null,2))));
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/data/pages.json`,{
+    method:'PUT',headers:{Authorization:'token '+token},body:JSON.stringify({message:'Publica produto',content,sha})
   });
-  document.getElementById('addU').onclick=()=>{homeConfig.updates.push({date:'',text:''});renderUpdates();};
-  cont.querySelectorAll('input').forEach(inp=>inp.onchange=e=>homeConfig.updates[e.target.dataset.i][e.target.placeholder==='Data'?'date':'text']=e.target.value);
-  cont.querySelectorAll('.delU').forEach(b=>b.onclick=e=>{homeConfig.updates.splice(e.target.dataset.i,1);renderUpdates();});
+  const j=await r.json();sha=j.content.sha;
+  statusEl.innerText='🎉 Publicado!';
+};
+const EMOJIS=['📞','🌐','💻','📡','🎤','📦','🚀','⚡','🔧','💡','🎯','🔥'];
+function renderEmojis(){
+  const eg=document.getElementById('emojiGrid');eg.innerHTML='';
+  EMOJIS.forEach(em=>{
+    let btn=document.createElement('button');btn.textContent=em;btn.className='emoji-btn';
+    btn.onclick=()=>{document.querySelectorAll('.emoji-btn.active').forEach(x=>x.classList.remove('active'));btn.classList.add('active');};
+    eg.appendChild(btn);
+  });
 }
-function renderDevelop(){
-  const el=document.getElementById('develop');
-  el.innerHTML='<h2>Desenvolver Produto</h2><label>Título</label><input id="pTitle"/><label>Emoji</label><input id="pEmoji"/><label>Subtítulo</label><input id="pSub"/><h3>Abas</h3><div id="mods"></div><button id="addM"class="btn">+ Aba</button><button id="saveP"class="btn">Salvar Produto</button>';
-  let temp={tabs:[]};
-  const md=document.getElementById('mods');
-  md.innerHTML='';
-  temp.tabs.forEach((t,i)=>{});
-  document.getElementById('addM').onclick=()=>{temp.tabs.push({label:'',content:''});renderDevelop();};
-  document.getElementById('saveP').onclick=()=>{let prod={id:Date.now().toString(),label:document.getElementById('pTitle').value,emoji:document.getElementById('pEmoji').value,subtitle:document.getElementById('pSub').value,tabs:temp.tabs};pagesConfig.push(prod);alert('Produto criado: '+prod.label);};
+function addModule(label='',content=''){
+  const mc=document.getElementById('modulesContainer');
+  let card=document.createElement('div');card.className='module-card';
+  card.innerHTML=\`
+    <label>Nome da Aba</label><input class="mod-label" placeholder="Ex: Características" value="\${label}"/>
+    <label>Conteúdo HTML</label><textarea class="mod-content" placeholder="Insira seu conteúdo HTML">\${content}</textarea>
+    <button class="del-mod">×</button>\`;
+  card.querySelector('.del-mod').onclick=()=>mc.removeChild(card);
+  mc.appendChild(card);
 }
-function renderEditProducts(){
-  const el=document.getElementById('edit');
-  el.innerHTML='<h2>Editar Produtos</h2><div id="prodList"></div>';
-  const list=document.getElementById('prodList');
-  pagesConfig.forEach((p,i)=>{const d=document.createElement('div');d.innerHTML=`<span>${p.emoji} ${p.label}</span> <button data-i="${i}" class="btn delP">Excluir</button>`;list.appendChild(d);});
-  list.querySelectorAll('.delP').forEach(b=>b.onclick=e=>{pagesConfig.splice(e.target.dataset.i,1);renderEditProducts();});
+function initDevelop(){
+  renderEmojis();
+  document.getElementById('modulesContainer').innerHTML='';
+  document.getElementById('btnAddModule').onclick=()=>addModule();
+  document.getElementById('btnSave').onclick=()=>{ 
+    const t=document.getElementById('prodTitle').value.trim();
+    const st=document.getElementById('prodSub').value.trim();
+    const em=document.querySelector('.emoji-btn.active')?.textContent||'🔖';
+    if(!t)return alert('Título obrigatório');
+    let tabsArr=[];
+    document.querySelectorAll('.module-card').forEach(c=>{
+      let l=c.querySelector('.mod-label').value.trim(),cnt=c.querySelector('.mod-content').value;
+      if(l)tabsArr.push({label:l,content:cnt});
+    });
+    if(!tabsArr.length)return alert('Crie ao menos uma aba');
+    let id=t.toLowerCase().replace(/\s+/g,'-');
+    pages.push({id,label:t,emoji:em,subtitle:st,tabs:tabsArr});
+    statusEl.innerText='✨ Pronto! Clique em Publicar';
+  };
 }
-function renderOrder(){document.getElementById('order').innerHTML='<h2>Ordem dos Produtos</h2><p>Em breve...</p>';}
-function renderEditHome(){const el=document.getElementById('homeedit');el.innerHTML='<h2>Editor da Home</h2><label>Título</label><input id="hTitle" value="'+homeConfig.title+'"/><label>Descrição</label><textarea id="hDesc">'+homeConfig.description+'</textarea>';document.getElementById('hTitle').onchange=e=>homeConfig.title=e.target.value;document.getElementById('hDesc').onchange=e=>homeConfig.description=e.target.value;}
+tabs.forEach(tab=>tab.addEventListener('click',()=>{
+  if(tab.dataset.section==='develop')initDevelop();
+}));

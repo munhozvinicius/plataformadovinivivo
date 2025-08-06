@@ -1,28 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Administração – Plataforma</title>
-<link rel="stylesheet" href="styles.css">
-</head><body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Administração – Plataforma do Vini</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .status { margin-top:8px; font-size:0.9rem; }
+    .admin-tabs { display:flex; flex-wrap:wrap; margin:16px 0; }
+    .admin-tabs .tab { flex:1; margin:4px; padding:8px; background:#e0e0e0; border:none; border-radius:4px; cursor:pointer; color:#4b0082; }
+    .admin-tabs .tab.active { background:#4b0082; color:white; }
+    .admin-section { display:none; }
+    .admin-section.active { display:block; }
+    .admin-card { background:white; padding:16px; margin-bottom:16px; border-radius:8px; }
+    .emoji-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-bottom:12px; }
+    .emoji-btn { font-size:1.4rem; padding:8px; background:#fff; border:1px solid #ccc; border-radius:4px; cursor:pointer; }
+    .emoji-btn.active { background:#4b0082; color:white; border-color:#4b0082; }
+    .module-card { position:relative; margin-bottom:12px; padding:12px; background:#fafafa; border:1px solid #ddd; border-radius:6px; }
+    .module-card .del-mod { position:absolute; top:8px; right:8px; background:#ff4d4f; color:white; border:none; border-radius:50%; width:24px; height:24px; text-align:center; cursor:pointer; }
+  </style>
+</head>
+<body>
   <aside class="sidebar">
     <h1>Administração</h1>
-    <button id="btnLoad" class="btn">Carregar Configuração</button>
-    <nav class="tabs">
-      <button data-sec="updates" class="tab active">Atualizações</button>
-      <button data-sec="develop" class="tab">Desenvolver Produto</button>
-      <button data-sec="edit" class="tab">Editar Produtos</button>
-      <button data-sec="order" class="tab">Ordem</button>
-      <button data-sec="homeedit" class="tab">Editor da Home</button>
+    <button id="btnLoad" class="btn">🔄 Carregar Configuração</button>
+    <nav class="admin-tabs">
+      <button data-section="updates" class="tab active">Atualizações</button>
+      <button data-section="develop" class="tab">+ Desenvolver Produto</button>
+      <button data-section="edit" class="tab">Editar Produtos</button>
+      <button data-section="order" class="tab">Ordem dos Produtos</button>
+      <button data-section="homeedit" class="tab">Editor da Home</button>
     </nav>
-    <button id="btnSave" class="btn">Salvar no GitHub</button>
-    <div id="status"></div>
+    <button id="btnSave" class="btn btn-block">💾 Salvar e Publicar</button>
+    <div id="status" class="status"></div>
   </aside>
   <main class="content">
-    <section id="updates" class="card sec active"></section>
-    <section id="develop" class="card sec"></section>
-    <section id="edit" class="card sec"></section>
-    <section id="order" class="card sec"></section>
-    <section id="homeedit" class="card sec"></section>
+    <section id="updates" class="admin-section active"><h2>Atualizações</h2></section>
+    <section id="develop" class="admin-section">
+      <h2>+ Desenvolver Produto</h2>
+      <div class="admin-card">
+        <label for="prodTitle">Título do Produto</label>
+        <input id="prodTitle" placeholder="Digite o nome do produto"/>
+      </div>
+      <div class="admin-card">
+        <label>Emoji do Produto</label>
+        <div id="emojiGrid" class="emoji-grid"></div>
+      </div>
+      <div class="admin-card">
+        <label for="prodSub">Subtítulo</label>
+        <input id="prodSub" placeholder="Ex: Produto Vivo"/>
+      </div>
+      <div class="admin-card">
+        <h3>Abas (Módulos)</h3>
+        <div id="modulesContainer"></div>
+        <button id="btnAddModule" class="btn">+ Adicionar Aba</button>
+      </div>
+    </section>
+    <section id="edit" class="admin-section"><h2>Editar Produtos</h2></section>
+    <section id="order" class="admin-section"><h2>Ordem dos Produtos</h2></section>
+    <section id="homeedit" class="admin-section"><h2>Editor da Home</h2></section>
   </main>
   <script src="admin.js"></script>
-</body></html>
+</body>
+</html>
