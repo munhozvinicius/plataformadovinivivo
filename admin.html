@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Administração – Plataforma do Vini</title>
-  <link rel="stylesheet" href="admin.css"/>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administração – Plataforma</title>
+  <link rel="stylesheet" href="admin.css">
 </head>
 <body>
   <div class="sidebar">
     <h2>Administração</h2>
     <button id="btnLoad" class="btn">Carregar Configuração</button>
-    <nav class="tab-nav">
-      <button data-section="updates" class="tab active">Atualizações</button>
-      <button data-section="edit-products" class="tab">Editar Produtos</button>
-      <button data-section="develop-products" class="tab">Desenvolver Produtos</button>
-      <button data-section="order-products" class="tab">Ordem dos Produtos</button>
-      <button data-section="edit-home" class="tab">Editor da Home</button>
+    <nav class="tabs">
+      <button data-sec="updates" class="tab active">Atualizações</button>
+      <button data-sec="edit-products" class="tab">Editar Produtos</button>
+      <button data-sec="develop-products" class="tab">Desenvolver Produtos</button>
+      <button data-sec="order-products" class="tab">Ordem dos Produtos</button>
+      <button data-sec="edit-home" class="tab">Editor da Home</button>
     </nav>
     <button id="btnSave" class="btn save">Salvar no GitHub</button>
-    <div id="status" class="status"></div>
+    <div id="status"></div>
   </div>
   <div class="main">
-    <section id="updates" class="section active"></section>
-    <section id="edit-products" class="section"></section>
-    <section id="develop-products" class="section"></section>
-    <section id="order-products" class="section"></section>
-    <section id="edit-home" class="section"></section>
+    <section id="updates" class="sec active"></section>
+    <section id="edit-products" class="sec"></section>
+    <section id="develop-products" class="sec"></section>
+    <section id="order-products" class="sec"></section>
+    <section id="edit-home" class="sec"></section>
   </div>
   <script src="admin.js"></script>
 </body>
