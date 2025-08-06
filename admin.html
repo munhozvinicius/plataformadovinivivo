@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Administração – Plataforma</title>
-  <link rel="stylesheet" href="admin.css">
-</head>
-<body>
-  <div class="sidebar">
-    <h2>Administração</h2>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Administração – Plataforma</title>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+  <aside class="sidebar">
+    <h1>Administração</h1>
     <button id="btnLoad" class="btn">Carregar Configuração</button>
     <nav class="tabs">
       <button data-sec="updates" class="tab active">Atualizações</button>
-      <button data-sec="edit-products" class="tab">Editar Produtos</button>
-      <button data-sec="develop-products" class="tab">Desenvolver Produtos</button>
-      <button data-sec="order-products" class="tab">Ordem dos Produtos</button>
-      <button data-sec="edit-home" class="tab">Editor da Home</button>
+      <button data-sec="develop" class="tab">Desenvolver Produto</button>
+      <button data-sec="edit" class="tab">Editar Produtos</button>
+      <button data-sec="order" class="tab">Ordem</button>
+      <button data-sec="homeedit" class="tab">Editor da Home</button>
     </nav>
-    <button id="btnSave" class="btn save">Salvar no GitHub</button>
+    <button id="btnSave" class="btn">Salvar no GitHub</button>
     <div id="status"></div>
-  </div>
-  <div class="main">
-    <section id="updates" class="sec active"></section>
-    <section id="edit-products" class="sec"></section>
-    <section id="develop-products" class="sec"></section>
-    <section id="order-products" class="sec"></section>
-    <section id="edit-home" class="sec"></section>
-  </div>
+  </aside>
+  <main class="content">
+    <section id="updates" class="card sec active"></section>
+    <section id="develop" class="card sec"></section>
+    <section id="edit" class="card sec"></section>
+    <section id="order" class="card sec"></section>
+    <section id="homeedit" class="card sec"></section>
+  </main>
   <script src="admin.js"></script>
-</body>
-</html>
+</body></html>
