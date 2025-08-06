@@ -1,0 +1,7 @@
+{
+  "title": "Bem-vindo à Plataforma do Vini",
+  "description": "Plataforma criada pensando em te ajudar a ser um consultor da Vivo.",
+  "updates": [ { "date": "06/08/2025", "text": "Adicionamos a página inicial." } ],
+  "highlights": [ { "title": "Destaque da Semana", "table": [["Plano","Valor"],["App for Business","R$73,00"]] } ],
+  "agents": [ { "title": "IA Suporte Comercial", "desc": "Ajuda na precificação.", "link": "#" } ]
+}

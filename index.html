@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home - Plataforma do Vini</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">Plataforma do Vini</div>
+    <button class="menu-button" onclick="navigateTo('home')">🏠 Home</button>
+    <button class="menu-button" onclick="navigateTo('ajuda-ai')">🤖 Ajuda aí IA</button>
+  </div>
+
+  <div class="content" id="content">
+    <div class="card">
+      <h1 class="title">Bem-vindo à Plataforma do Vini</h1>
+      <p>Plataforma criada pensando em te ajudar a ser um consultor da Vivo.</p>
+    </div>
+
+    <div class="card alert">
+      <h2>Atualizações</h2>
+      <p><strong>Última atualização:</strong> 06/08/2025</p>
+      <p>Adicionamos a página inicial e os primeiros cards da plataforma.</p>
+    </div>
+
+    <div class="card">
+      <h2 class="highlight">Destaque da Semana</h2>
+      <p>Confira a nova tabela de preços:</p>
+      <table>
+        <thead>
+          <tr><th>Plano</th><th>Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Office 365 E1</td><td>R$ 67,00</td></tr>
+          <tr><td>Microsoft 365 Business Standard</td><td>R$ 81,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card ia-card">
+      <h3>IA de <strong>Suporte Comercial</strong></h3>
+      <p>Ajuda na precificação de planos, licenciamento e tabela de comissionamento.</p>
+      <button onclick="alert('Simulação: acessando IA')">Acessar IA</button>
+    </div>
+  </div>
+</body>
+</html>
