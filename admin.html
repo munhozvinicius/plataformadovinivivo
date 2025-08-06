@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Administração – Plataforma do Vini</title>
+<title>Administração – Plataforma</title>
 <link rel="stylesheet" href="styles.css">
 </head><body>
   <aside class="sidebar">
     <h1>Administração</h1>
     <button id="btnLoad" class="btn">Carregar Configuração</button>
-    <nav class="admin-tabs">
-      <button data-section="updates" class="tab">Atualizações</button>
-      <button data-section="develop" class="tab active">+ Desenvolver Produto</button>
-      <button data-section="edit" class="tab">Editar Produtos</button>
-      <button data-section="order" class="tab">Ordem dos Produtos</button>
-      <button data-section="homeedit" class="tab">Editor da Home</button>
+    <nav class="tabs">
+      <button data-sec="updates" class="tab active">Atualizações</button>
+      <button data-sec="develop" class="tab">Desenvolver Produto</button>
+      <button data-sec="edit" class="tab">Editar Produtos</button>
+      <button data-sec="order" class="tab">Ordem</button>
+      <button data-sec="homeedit" class="tab">Editor da Home</button>
     </nav>
-    <button id="btnSave" class="btn btn-block">💾 Salvar e Publicar Produto</button>
-    <div id="status" class="status"></div>
+    <button id="btnSave" class="btn">Salvar no GitHub</button>
+    <div id="status"></div>
   </aside>
   <main class="content">
-    <section id="updates" class="admin-section"></section>
-    <section id="develop" class="admin-section active"></section>
-    <section id="edit" class="admin-section"></section>
-    <section id="order" class="admin-section"></section>
-    <section id="homeedit" class="admin-section"></section>
+    <section id="updates" class="card sec active"></section>
+    <section id="develop" class="card sec"></section>
+    <section id="edit" class="card sec"></section>
+    <section id="order" class="card sec"></section>
+    <section id="homeedit" class="card sec"></section>
   </main>
   <script src="admin.js"></script>
 </body></html>

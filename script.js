@@ -37,19 +37,6 @@ function renderHome() {
   const upd = document.createElement('div'); upd.className='card alert';
   upd.innerHTML = '<h2>Atualizações</h2>' + (homeConfig.updates||[]).map(u=>`<p><strong>${u.date}</strong> - ${u.text}</p>`).join('');
   c.appendChild(upd);
-  (homeConfig.highlights||[]).forEach(h=>{
-    const d = document.createElement('div'); d.className='card';
-    d.innerHTML = `<h2 class="title">${h.title}</h2>
-      <table><thead><tr>${h.table[0].map(th=>`<th>${th}</th>`).join('')}</tr></thead>
-      <tbody>${h.table.slice(1).map(r=>`<tr>${r.map(td=>`<td>${td}</td>`).join('')}</tr>`).join('')}</tbody>
-      </table>`;
-    c.appendChild(d);
-  });
-  (homeConfig.agents||[]).forEach(a=>{
-    const d = document.createElement('div'); d.className='card';
-    d.innerHTML = `<h3>${a.title}</h3><p>${a.desc}</p><button onclick="window.open('${a.link}','_blank')">Acessar IA</button>`;
-    c.appendChild(d);
-  });
 }
 
 function renderProduct(id) {
@@ -84,5 +71,9 @@ function router() {
   else clearContent();
 }
 
-window.addEventListener('load', async()=>{ await loadConfigs(); renderSidebar(); router(); });
+window.addEventListener('load', async()=>{
+  await loadConfigs();
+  renderSidebar();
+  router();
+});
 window.addEventListener('hashchange', router);
