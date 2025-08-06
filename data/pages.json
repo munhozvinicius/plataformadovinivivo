@@ -1,14 +1,14 @@
 [
   {
-    "id": "ajuda-ai",
-    "label": "Ajuda aí IA",
-    "emoji": "🤖",
-    "subtitle": "Produto Vivo",
-    "tabs": [
-      { "label": "Características Principais", "content": "Essa IA auxilia usuários no uso da plataforma de forma inteligente." },
-      { "label": "Tabela de Preços", "content": "<table>...</table>" },
-      { "label": "Observações Importantes", "content": "<ul><li>...</li></ul>" },
-      { "label": "Agentes IA", "content": "<ul><li>...</li></ul>" }
+    "id":"ajuda-ia",
+    "label":"Ajuda aí IA",
+    "emoji":"🤖",
+    "subtitle":"Produto Vivo",
+    "tabs":[
+      {"label":"Características Principais","content":"IA que aux..."},
+      {"label":"Tabela de Preços","content":"<table>...</table>"},
+      {"label":"Observações Importantes","content":"<ul><li>...</li></ul>"},
+      {"label":"Agentes IA","content":"<ul><li>...</li></ul>"}
     ]
   }
 ]

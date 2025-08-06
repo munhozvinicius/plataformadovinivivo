@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ajuda aí IA - Produto</title>
-  <style>/* ... include your earlier product page styles here ... */</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ajuda aí IA - Plataforma do Vini</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <!-- ... include your earlier produto HTML content here ... -->
+  <div class="sidebar">
+    <div class="logo">Plataforma do Vini</div>
+    <a class="menu-button" href="index.html">🏠 Home</a>
+    <a class="menu-button" href="ajuda_ia.html">🤖 Ajuda aí IA</a>
+    <a class="menu-button" href="admin.html">🛠️ Admin</a>
+  </div>
+  <div class="content">
+    <h1 class="title">🤖 Ajuda aí IA</h1>
+    <p class="subtitle">Produto Vivo</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showTab(0)">Características Principais</button>
+      <button class="tab" onclick="showTab(1)">Tabela de Preços</button>
+      <button class="tab" onclick="showTab(2)">Observações Importantes</button>
+      <button class="tab" onclick="showTab(3)">Agentes IA</button>
+    </div>
+    <div class="tab-content active">
+      <h2>Ajuda aí IA</h2>
+      <p>Essa IA é voltada para auxiliar usuários no uso da plataforma de forma inteligente e contextualizada.</p>
+    </div>
+    <div class="tab-content">
+      <h2>Tabela de Preços</h2>
+      <table>
+        <thead><tr><th>Licença</th><th>Preço</th></tr></thead>
+        <tbody>
+          <tr><td>Office 365 E1</td><td>R$ 67,00</td></tr>
+          <tr><td>Microsoft 365 Business Standard</td><td>R$ 81,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-content">
+      <h2>Observações Importantes</h2>
+      <div class="alert">Os valores acima são válidos para faturamento na base móvel.</div>
+    </div>
+    <div class="tab-content">
+      <h2>Agentes IA</h2>
+      <p>Clique no botão abaixo para abrir o agente:</p>
+      <button>Acessar Agente</button>
+    </div>
+  </div>
+  <script>
+    function showTab(i) {
+      document.querySelectorAll('.tab').forEach((btn,idx)=>{
+        btn.classList.toggle('active', idx===i);
+        document.querySelectorAll('.tab-content')[idx].classList.toggle('active', idx===i);
+      });
+    }
+  </script>
 </body>
 </html>

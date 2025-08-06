@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Painel de Desenvolvimento</title>
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css"/>
 </head>
 <body>
-  <!-- ... your updated admin.html content ... -->
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <button id="loadBtn" class="btn">Carregar Configuração</button>
+    <button id="newPageBtn" class="btn">+ Nova Página</button>
+    <button id="editHomeBtn" class="btn">Editar Home</button>
+    <button id="saveBtn" class="btn">Salvar no GitHub</button>
+    <div id="status"></div>
+  </div>
+  <div class="main">
+    <h1>Painel de Desenvolvimento</h1>
+    <section id="pagesSection">
+      <h2>Páginas de Produto</h2>
+      <div id="pagesList"></div>
+      <div id="pageEditor" style="display:none;"></div>
+    </section>
+    <section id="homeSection" style="display:none;">
+      <h2>Configuração da HomePage</h2>
+      <div id="homeEditor"></div>
+    </section>
+  </div>
+  <script src="admin.js"></script>
 </body>
 </html>

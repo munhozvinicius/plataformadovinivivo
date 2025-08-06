@@ -1,84 +1,19 @@
-body {
-  display: flex;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-}
-.sidebar {
-  background: #40006b;
-  color: white;
-  width: 220px;
-  padding: 16px;
-  min-height: 100vh;
-}
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 24px;
-}
-.menu-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background: white;
-  color: #40006b;
-  border: 2px solid #40006b;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.menu-button:hover {
-  background: #e0c4f7;
-}
-.content {
-  flex: 1;
-  padding: 30px 60px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.card {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-.alert {
-  background: #fff8cc;
-}
-.highlight {
-  color: #40006b;
-}
-.title {
-  font-size: 28px;
-  color: #40006b;
-}
-table {
-  width: 100%;
-  margin-top: 16px;
-  border-collapse: collapse;
-  border-radius: 12px;
-  overflow: hidden;
-}
-thead {
-  background: #40006b;
-  color: white;
-}
-td, th {
-  padding: 12px;
-  text-align: left;
-}
-tbody tr:nth-child(even) {
-  background: #f0f0f0;
-}
-.ia-card button {
-  margin-top: 12px;
-  padding: 10px 16px;
-  border: none;
-  background: #7200b8;
-  color: white;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-}
+body{margin:0;font-family:Arial,sans-serif;display:flex;}
+.sidebar{background:#40006b;color:white;width:220px;padding:16px;min-height:100vh;}
+.logo{font-size:20px;font-weight:bold;margin-bottom:24px;}
+.menu-button{display:block;width:100%;padding:10px;margin-bottom:10px;background:white;color:#40006b;border:none;border-radius:10px;font-weight:bold;text-decoration:none;text-align:center;}
+.content{flex:1;padding:30px 60px;max-width:1000px;margin:0 auto;background:#f5f5f5;}
+.card{background:white;border-radius:20px;padding:24px;margin-bottom:30px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.alert{background:#fff8cc;padding:12px;border-radius:8px;}
+.highlight{color:#40006b;}
+.title{font-size:28px;color:#40006b;margin:0;}
+.subtitle{color:#666;margin-top:4px;}
+.tabs{display:flex;gap:10px;margin:20px 0;}
+.tab{padding:10px 20px;background:#eee;border-radius:20px;cursor:pointer;border:none;}
+.tab.active{background:#40006b;color:white;}
+.tab-content{display:none;background:white;padding:20px;border-radius:12px;box-shadow:0 0 12px rgba(0,0,0,0.1);}
+.tab-content.active{display:block;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+th{background:#40006b;color:white;padding:10px;text-align:left;}
+td{padding:10px;border:1px solid #ddd;}
+.ia-card button{margin-top:12px;padding:10px 16px;background:#7200b8;color:white;border:none;border-radius:12px;cursor:pointer;}

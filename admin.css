@@ -1,1 +1,6 @@
-/* your updated admin.css here */
+body{margin:0;font-family:Arial,sans-serif;display:flex;}
+.sidebar{background:#3b0066;color:white;width:220px;padding:20px;box-sizing:border-box;}
+.sidebar h2{margin-top:0;font-size:20px;}
+.btn{display:block;width:100%;margin:10px 0;padding:10px;background:white;color:#3b0066;border:none;border-radius:8px;cursor:pointer;font-weight:bold;}
+#status{color:white;margin-top:10px;}
+.main{flex:1;padding:20px;background:#f4f4f4;overflow-y:auto;}
