@@ -1,5 +1,14 @@
 {
   "title": "Bem-vindo à Plataforma do Vini",
-  "subtitle": "Plataforma criada pensando em te ajudar",
-  "updates": []
+  "subtitle": "Plataforma criada pensando em te ajudar a ser um consultor da Vivo",
+  "updates": [
+    {
+      "date": "06/08/2025",
+      "text": "Nova tabela de preços para Microsoft 365 adicionada."
+    },
+    {
+      "date": "05/08/2025",
+      "text": "Página do produto 'Ajuda aí IA' foi criada com descrição e tabs."
+    }
+  ]
 }
