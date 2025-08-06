@@ -9,23 +9,23 @@
 <body>
   <div class="sidebar">
     <h2>Admin Panel</h2>
-    <button id="loadBtn" class="btn">Carregar Configuração</button>
-    <button id="newPageBtn" class="btn">+ Nova Página</button>
-    <button id="editHomeBtn" class="btn">Editar Home</button>
-    <button id="saveBtn" class="btn">Salvar no GitHub</button>
+    <button id="btnLoadPages" class="btn">Carregar Configuração</button>
+    <button id="btnNewPage" class="btn">+ Nova Página</button>
+    <button id="btnEditHome" class="btn">Editar Home</button>
+    <button id="btnSaveAll" class="btn">Salvar no GitHub</button>
     <div id="status"></div>
   </div>
   <div class="main">
     <h1>Painel de Desenvolvimento</h1>
-    <section id="pagesSection">
+    <div id="pagesSection" class="section">
       <h2>Páginas de Produto</h2>
       <div id="pagesList"></div>
-      <div id="pageEditor" style="display:none;"></div>
-    </section>
-    <section id="homeSection" style="display:none;">
+      <div id="pageEditor" style="display:none; margin-top:20px;"></div>
+    </div>
+    <div id="homeSection" class="section" style="display:none; margin-top:20px;">
       <h2>Configuração da HomePage</h2>
       <div id="homeEditor"></div>
-    </section>
+    </div>
   </div>
   <script src="admin.js"></script>
 </body>

@@ -48,9 +48,9 @@
   </div>
   <script>
     function showTab(i) {
-      document.querySelectorAll('.tab').forEach((btn,idx)=>{
-        btn.classList.toggle('active', idx===i);
-        document.querySelectorAll('.tab-content')[idx].classList.toggle('active', idx===i);
+      document.querySelectorAll('.tab').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx === i);
+        document.querySelectorAll('.tab-content')[idx].classList.toggle('active', idx === i);
       });
     }
   </script>
