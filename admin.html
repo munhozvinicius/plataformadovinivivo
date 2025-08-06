@@ -3,29 +3,48 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel de Desenvolvimento</title>
+  <title>Administração – Plataforma do Vini</title>
   <link rel="stylesheet" href="admin.css"/>
 </head>
 <body>
   <div class="sidebar">
-    <h2>Admin Panel</h2>
-    <button id="btnLoadPages" class="btn">Carregar Configuração</button>
-    <button id="btnNewPage" class="btn">+ Nova Página</button>
-    <button id="btnEditHome" class="btn">Editar Home</button>
-    <button id="btnSaveAll" class="btn">Salvar no GitHub</button>
+    <h2>Administração</h2>
+    <button id="btnLoad" class="btn">Carregar Configuração</button>
+    <nav class="tab-nav">
+      <button data-section="updates" class="tab active">Atualizações</button>
+      <button data-section="edit-products" class="tab">Editar Produtos</button>
+      <button data-section="develop-products" class="tab">Desenvolver Produtos</button>
+      <button data-section="order-products" class="tab">Ordem dos Produtos</button>
+      <button data-section="edit-home" class="tab">Editor da Home</button>
+    </nav>
+    <button id="btnSave" class="btn save">Salvar no GitHub</button>
     <div id="status"></div>
   </div>
   <div class="main">
-    <h1>Painel de Desenvolvimento</h1>
-    <div id="pagesSection" class="section">
-      <h2>Páginas de Produto</h2>
-      <div id="pagesList"></div>
-      <div id="pageEditor" style="display:none; margin-top:20px;"></div>
-    </div>
-    <div id="homeSection" class="section" style="display:none; margin-top:20px;">
-      <h2>Configuração da HomePage</h2>
-      <div id="homeEditor"></div>
-    </div>
+    <section id="updates" class="section active">
+      <h1>Atualizações</h1>
+      <!-- Content for updates -->
+      <p>Gerencie as atualizações globais da plataforma.</p>
+    </section>
+    <section id="edit-products" class="section">
+      <h1>Editar Produtos</h1>
+      <!-- Stub for editing existing products -->
+      <p>Selecione um produto para editar seus detalhes.</p>
+    </section>
+    <section id="develop-products" class="section">
+      <h1>Desenvolver Produto</h1>
+      <!-- Desenvolver Produto form -->
+      <p>Crie um novo produto do zero.</p>
+    </section>
+    <section id="order-products" class="section">
+      <h1>Ordem dos Produtos</h1>
+      <p>Arraste para reorder os produtos no menu lateral.</p>
+    </section>
+    <section id="edit-home" class="section">
+      <h1>Editor da Home</h1>
+      <p>Edite título, descrições, atualizações, destaques e agentes da HomePage.</p>
+      <!-- Home editor form goes here -->
+    </section>
   </div>
   <script src="admin.js"></script>
 </body>
